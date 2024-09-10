@@ -69,8 +69,11 @@ class XP3(XP3Reader, XP3Writer):
         if not self.silent:
             print('Packing {}'.format(path))
         for dirpath, dirs, filenames in os.walk(path):
-            # Strip off the base directory and possible slash
-            internal_root = dirpath[len(path) + 1:]
+            # get the internal root path for the files in this directory
+            internal_root = os.path.relpath(dirpath, path)
+            # relpath returns ./ for the base directory, which we don't want.
+            if internal_root == ".":
+                internal_root = ""
             # and make sure we're using forward slash as a separator
             internal_root = internal_root.split(os.sep)
             internal_root = '/'.join(internal_root)

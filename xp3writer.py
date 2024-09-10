@@ -55,9 +55,7 @@ class XP3Writer:
             timestamp=timestamp)
         self.file_entries.append(file_entry)
         if not self.silent:
-            print('| Packing {} ({} -> {} bytes)'.format(internal_filepath,
-                                                         file_entry.segm.uncompressed_size,
-                                                         file_entry.segm.compressed_size))
+            print('| Packing {} ({} -> {} bytes)'.format(internal_filepath, file_entry.segm.uncompressed_size, file_entry.segm.compressed_size))
         self.buffer.write(file)
 
     def pack_up(self) -> bytes:
@@ -86,7 +84,7 @@ class XP3Writer:
             return self.buffer.getvalue()
 
     def _create_file_entry(self, internal_filepath, uncompressed_data, offset, encryption_type: str = None,
-                           timestamp: int = 0) -> (XP3FileEntry, bytes):
+                           timestamp: int = 0) -> tuple[XP3FileEntry, bytes]:
         """
         Create a file entry for a file
         :param internal_filepath: Internal file path
