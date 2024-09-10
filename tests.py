@@ -80,8 +80,9 @@ class FolderReadAndWrite(unittest.TestCase):
 
 class MemoryReadAndWrite(unittest.TestCase):
     """In memory read and write"""
+    time = datetime.datetime.now()
     dummy_data = (
-        ('dummy_file_1', b'dummydata1', round(datetime.datetime.utcnow().timestamp() * 1000), False),  # convert timestamp to milliseconds
+        ('dummy_file_1', b'dummydata1', round(time.timestamp() * 1000), False),  # convert timestamp to milliseconds
         ('dummy_file_2', b'dummydata2', 2000, False),
         ('dummy_file_3', b'111111111111', 3000, True),  # should be compressed
         ('dummy_file_4', b'11111111111', 3000, False)  # compressed and uncompressed sizes should match, do not compress
